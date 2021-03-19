@@ -1,7 +1,5 @@
 <?php
 
-use frontend\modules\i18n\models\TranslationEventHandler;
-
 return [
     'name' => 'Yii App',
     'language' => 'en-US',
@@ -12,16 +10,16 @@ return [
     'vendorPath' => dirname(__DIR__, 2) . '/vendor',
     'components' => [
         'redis' => [
-            'class' => 'yii\redis\Connection',
+            'class' => yii\redis\Connection::class,
             'hostname' => 'localhost',
             'port' => 6379,
             'database' => 0,
         ],
         'cache' => [
-            'class' => 'yii\redis\Cache',
+            'class' => yii\redis\Cache::class,
         ],
         'db' => [
-            'class' => 'yii\db\Connection',
+            'class' => yii\db\Connection::class,
             'dsn' => 'mysql:host=localhost;dbname=localdb',
             'username' => 'localuser',
             'password' => 'localpass',
@@ -31,7 +29,7 @@ return [
             //'schemaCache' => 'cache',
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            'class' => yii\swiftmailer\Mailer::class,
             'viewPath' => '@common/mail',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
@@ -48,7 +46,7 @@ return [
                     'cachingDuration' => 0,
                     'forceTranslation'=>true,
                     'sourceLanguage' =>'en_US',
-                    'on missingTranslation' => [TranslationEventHandler::class, 'handleMissingTranslation']
+                    'on missingTranslation' => [frontend\modules\i18n\models\TranslationEventHandler::class, 'handleMissingTranslation']
                 ],
             ],
         ],

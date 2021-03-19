@@ -2,7 +2,7 @@
 return [
     'components' => [
         'db' => [
-            'class' => 'yii\db\Connection',
+            'class' => yii\db\Connection::class,
             'dsn' => 'mysql:host=localhost;dbname=localdbtest',
             'username' => 'localuser',
             'password' => 'localpass',
