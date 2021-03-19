@@ -5,7 +5,7 @@ namespace frontend\modules\user\models\records\user;
 /**
  * User Query
  */
-class UserQuery extends UserValidate
+class UserQuery extends UserValidation
 {
     /**
      * Finds user by email

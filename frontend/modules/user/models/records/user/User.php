@@ -8,7 +8,7 @@ use yii\behaviors\TimestampBehavior;
 /**
  * User.
  */
-class User extends UserQuery
+class User extends UserIdentity
 {
 
     /**

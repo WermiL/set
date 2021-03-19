@@ -8,7 +8,7 @@ use yii\web\IdentityInterface;
 /**
  * This is the model User Identity.
  */
-class UserIdentity extends UserInit implements IdentityInterface
+class UserIdentity extends UserQuery implements IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -23,7 +23,7 @@ class UserIdentity extends UserInit implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('temp');
+        throw new NotSupportedException('NotSupported');
     }
 
 
