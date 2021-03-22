@@ -93,10 +93,13 @@
 }
 .skin-green .sidebar-menu .treeview-menu > li > a {
   color: #8aa4af;
+  border: 1px solid #2c3b41;
 }
 .skin-green .sidebar-menu .treeview-menu > li.active > a,
 .skin-green .sidebar-menu .treeview-menu > li > a:hover {
   color: #ffffff;
+  border: 1px solid #1d272b;
+  background-color: #28353b;
 }
 .skin-green .sidebar-form {
   border-radius: 3px;
