@@ -1,11 +1,13 @@
-<a href="" class="logo">
-    <span class="logo-mini">Yii</span>
-    <span class="logo-lg">Yii App</span>
-</a>
-<nav class="navbar navbar-static-top p-0">
-    <a href="#" class="sidebar-toggle fas fa-bars" data-toggle="push-menu" role="button">
+<header class="main-header">
+    <a href="" class="logo">
+        <span class="logo-mini">Yii</span>
+        <span class="logo-lg">Yii App</span>
     </a>
-    <div class="navbar-custom-menu">
-    </div>
-</nav>
+    <nav class="navbar navbar-static-top p-0">
+        <a href="#" class="sidebar-toggle fas fa-bars" data-toggle="push-menu" role="button">
+        </a>
+        <div class="navbar-custom-menu">
+        </div>
+    </nav>
+</header>
 

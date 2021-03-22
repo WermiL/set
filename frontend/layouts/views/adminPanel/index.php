@@ -22,22 +22,19 @@ AppAsset::register($this);
 </head>
 <body class="sidebar-mini skin-green">
 <?php $this->beginBody() ?>
-    <div class="wrapper">
-<header class="main-header">
+<div class="wrapper">
+
     <?= $this->render('_header') ?>
-</header>
-<aside class="main-sidebar">
+
     <?= $this->render('_leftSidebar') ?>
-</aside>
-<div class="content-wrapper">
+
     <?= $this->render('_main', [
         'content' => $content
     ]) ?>
-</div>
-<footer class="main-footer p-1">
+
     <?= $this->render('_footer') ?>
-</footer>
-    </div>
+
+</div>
 <?php $this->endBody() ?>
 </body>
 </html>
