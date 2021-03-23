@@ -50,5 +50,12 @@ return [
                 ],
             ],
         ],
+        'authManager' => [
+            'class' => yii\rbac\DbManager::class,
+            'itemTable' =>'rbac_auth_item',
+            'itemChildTable' =>'rbac_auth_item_child',
+            'assignmentTable' =>'rbac_auth_assignment',
+            'ruleTable' =>'rbac_auth_rule',
+        ],
     ],
 ];
