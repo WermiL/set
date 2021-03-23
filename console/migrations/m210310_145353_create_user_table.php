@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Migration;
+use \frontend\modules\user\models\records\user\User;
 
 class m210310_145353_create_user_table extends Migration
 {
@@ -20,6 +21,41 @@ class m210310_145353_create_user_table extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ]);
+
+        $auth = Yii::$app->authManager;
+        $roleAdmin = $auth->createRole(User::ROLE_ADMIN);
+        $auth->add($roleAdmin);
+
+        $roleUser = $auth->createRole(User::ROLE_USER);
+        $auth->add($roleUser);
+
+        $roleDemo = $auth->createRole(User::ROLE_DEMO);
+        $auth->add($roleDemo);
+
+
+        $createPost = $auth->createPermission('user/create');
+        $createPost->description = 'User Create';
+        $auth->add($createPost);
+
+        $updatePost = $auth->createPermission('user/update');
+        $updatePost->description = 'User Update';
+        $auth->add($updatePost);
+
+        $deletePost = $auth->createPermission('user/delete');
+        $deletePost->description = 'User Delete';
+        $auth->add($deletePost);
+
+        $viewPost = $auth->createPermission('user/view');
+        $viewPost->description = 'User View';
+        $auth->add($viewPost);
+
+        $auth->addChild($roleAdmin, $createPost);
+        $auth->addChild($roleAdmin, $updatePost);
+        $auth->addChild($roleAdmin, $deletePost);
+        $auth->addChild($roleAdmin, $viewPost);
+
+
+
     }
 
     public function down()

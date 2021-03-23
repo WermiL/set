@@ -22,6 +22,11 @@ use Yii;
  */
 class UserValidation extends \yii\db\ActiveRecord
 {
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
+    const ROLE_DEMO = 'demo';
+
+
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;

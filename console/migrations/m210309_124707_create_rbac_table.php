@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%rbac}}`.
  */
-class m210323_124707_create_rbac_table extends Migration
+class m210309_124707_create_rbac_table extends Migration
 {
     /**
      * {@inheritdoc}

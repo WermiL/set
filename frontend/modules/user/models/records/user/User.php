@@ -2,6 +2,7 @@
 
 namespace frontend\modules\user\models\records\user;
 
+use frontend\modules\rbac\behaviors\AuthAssignmentBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -18,6 +19,7 @@ class User extends UserIdentity
     {
         return [
             TimestampBehavior::class,
+            AuthAssignmentBehavior::class
         ];
     }
 
