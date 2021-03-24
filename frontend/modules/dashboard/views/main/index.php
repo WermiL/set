@@ -4,6 +4,6 @@
 
 $this->title = 'Dashboard';
 ?>
-<div class="index">
+<div class="dashboard-index">
 
 </div>

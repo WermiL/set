@@ -2,6 +2,7 @@
 
 namespace frontend\layouts\helpers;
 
+use Yii;
 use yii\helpers\Url;
 
 /**
@@ -16,15 +17,19 @@ class AdminLteHelper
      * @param string $url
      * @param string $currentUrl
      * @param string $icon
+     * @param string $permission
      * @param string $name
-     * @return string
+     * @return string|void
      */
-    public static function sidebarItem($url, $currentUrl, $icon, $name)
+    public static function sidebarItem($url, $currentUrl, $icon, $permission, $name)
     {
-        $html = '<li ' . self::sidebarDefineActiveItem($url, $currentUrl) . '>
-                    <a href="' . Url::to($url) . '"><i class="' . $icon . '"></i> ' . $name . '</a>
+        if (Yii::$app->user->can($permission)) {
+            $html = '<li ' . self::sidebarDefineActiveItem($url, $currentUrl) . '>
+                    <a href="' . Url::to($url) . '"><i class="' . $icon . '"></i><span> ' . $name . '</span></a>
                 </li>';
-        return $html;
+            return $html;
+        }
+
     }
 
     /**
@@ -53,7 +58,7 @@ class AdminLteHelper
      */
     public static function sidebarDefineActiveItem($url, $currentUrl)
     {
-        $url= str_replace('/', '\/', $url);
+        $url = str_replace('/', '\/', $url);
         return preg_match("/^" . $url . "/i", $currentUrl) ? 'class="active"' : '';
     }
 
@@ -68,7 +73,7 @@ class AdminLteHelper
     {
         $urls = '(';
         foreach ($possibleUrls as $item) {
-            $item= str_replace('/', '\/', $item);
+            $item = str_replace('/', '\/', $item);
             $urls .= '^' . $item . '|';
         }
         $urls = substr($urls, 0, -1);
@@ -76,5 +81,19 @@ class AdminLteHelper
         return preg_match("/" . $urls . "/i", $currentUrl) ? ' menu-open active' : '';
     }
 
-
+    /**
+     *  Treeview view permission
+     *
+     * @param array $permissions
+     * @return boolean
+     */
+    public static function sidebarTreeviewViewPermission($permissions)
+    {
+        foreach ($permissions as $item) {
+            if (Yii::$app->user->can($item)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

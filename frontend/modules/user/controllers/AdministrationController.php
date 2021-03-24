@@ -31,12 +31,7 @@ class AdministrationController extends LayoutController
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index'],
-                        'permissions' => ['user/view'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['view'],
+                        'actions' => ['index','view'],
                         'permissions' => ['user/view'],
                     ],
                     [

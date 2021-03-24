@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\user\models\records\user\User */
 
-$this->title = 'User: '.$model->email;
+$this->title = 'User: ' . $model->email;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('user-administration', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -37,13 +37,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
         </div>
         <div class="row">
-            <?= Html::a(Yii::t('user-administration', 'Delete'), ['delete', 'id' => $model->id], ['class' => 'btn btn-danger mx-auto',
-                'data' => [
-                    'confirm' => Yii::t('user-administration', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
-            <?= Html::a(Yii::t('user-administration', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary mx-auto']) ?>
+            <?php if (Yii::$app->user->can('user/delete')) : ?>
+                <?= Html::a(Yii::t('user-administration', 'Delete'), ['delete', 'id' => $model->id], ['class' => 'btn btn-danger mx-auto',
+                    'data' => [
+                        'confirm' => Yii::t('user-administration', 'Are you sure you want to delete this item?'),
+                        'method' => 'post',
+                    ],
+                ]) ?>
+            <?php endif; ?>
+            <?php if (Yii::$app->user->can('user/update')) : ?>
+                <?= Html::a(Yii::t('user-administration', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary mx-auto']) ?>
+            <?php endif; ?>
         </div>
     </div>
 </section>

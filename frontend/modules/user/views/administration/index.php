@@ -20,9 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
 </section>
 <section class="content bg-light border rounded">
     <div class="user-index">
-        <p>
-            <?= Html::a(Yii::t('user-administration', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
-        </p>
+        <?php if (Yii::$app->user->can('user/create')) : ?>
+            <p>
+                <?= Html::a(Yii::t('user-administration', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
+        <?php endif; ?>
         <div class="table-responsive">
             <?= GridView::widget([
                 'tableOptions' => [
@@ -37,7 +39,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'first_name',
                     'last_name',
                     'status',
-                    ['class' => ActionColumn::class],
+                    [
+                        'class' => ActionColumn::class,
+                        'visibleButtons' => [
+                            'view' => Yii::$app->user->can('user/view'),
+                            'update' => Yii::$app->user->can('user/update'),
+                            'delete' => Yii::$app->user->can('user/delete'),
+                        ]
+                    ],
                 ],
             ]) ?>
         </div>
