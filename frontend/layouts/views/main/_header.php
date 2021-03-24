@@ -1,4 +1,5 @@
 <?php
+
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
@@ -12,8 +13,9 @@ NavBar::begin([
 ]);
 $menuItems = [];
 if (Yii::$app->user->isGuest) {
-    $menuItems[] = ['label' => 'Sign in', 'url' => ['/user/sign-in'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light']];
+    $menuItems[] = ['label' => 'Sign in', 'url' => ['/user/sign-in'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light ml-auto']];
     $menuItems[] = ['label' => 'Sign up', 'url' => ['/user/sign-up'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light']];
+    $navOptions = ['class' => 'navbar-nav ml-auto'];
 } else {
     $menuItems[] = ['label' => 'Admin Panel', 'url' => ['/dashboard/main'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light mr-auto']];
 
@@ -25,11 +27,10 @@ if (Yii::$app->user->isGuest) {
         )
         . Html::endForm()
         . '</li>';
+    $navOptions = ['class' => 'navbar-nav col-12'];
 }
 echo Nav::widget([
-    'options' => ['class' => 'navbar-nav col-12'],
+    'options' => $navOptions,
     'items' => $menuItems,
 ]);
 NavBar::end();
-?>
-
