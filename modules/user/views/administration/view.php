@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 $this->title = 'User: ' . $model->email;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+
 ?>
 <section class="content-header px-0 pb-1">
     <h1><?= Html::encode($this->title) ?></h1>

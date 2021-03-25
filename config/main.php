@@ -16,8 +16,8 @@ return [
     'id' => 'yii-app',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'controllerNamespace' => 'app\controllers',
-    'viewPath'=>'@app/views',
+    'controllerNamespace' => 'app\frontend\controllers',
+    'viewPath'=>'@app/frontend/views',
     'components' => [
         'redis' => [
             'class' => yii\redis\Connection::class,

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\assets;
+namespace app\layouts\assets;
 
 use yii\web\AssetBundle;
 
@@ -20,7 +20,7 @@ class AdminPanelAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap4\BootstrapAsset',
-        'app\assets\parts\AdminLteAsset',
-        'app\assets\parts\FontAwesomeAsset'
+        'app\layouts\assets\parts\AdminLteAsset',
+        'app\layouts\assets\parts\FontAwesomeAsset'
     ];
 }

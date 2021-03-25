@@ -4,7 +4,7 @@
 
 /* @var $content string */
 
-use app\assets\AdminPanelAsset;
+use app\layouts\assets\AdminPanelAsset;
 use yii\helpers\Html;
 
 AdminPanelAsset::register($this);

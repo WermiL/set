@@ -1,9 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace app\frontend\controllers;
 
 use app\layouts\controller\LayoutController;
-use app\models\forms\ContactForm;
+use app\frontend\models\forms\ContactForm;
 use Yii;
 use yii\captcha\CaptchaAction;
 use yii\web\ErrorAction;
