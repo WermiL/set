@@ -1,23 +1,21 @@
 <?php
-$params = array_merge(
-    require __DIR__ . '/params.php',
-    require __DIR__ . '/params-local.php'
-);
+$basePath = dirname(__DIR__);
 
 return [
     'name' => 'Yii App',
     'language' => 'en-US',
     'aliases' => [
+        '@app' => $basePath,
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
     ],
-    'vendorPath' => dirname(__DIR__) . '/vendor',
-    'id' => 'yii-app-console',
-    'basePath' => dirname(__DIR__),
+    'vendorPath' => $basePath . '/vendor',
+    'id' => 'app-console-id',
+    'basePath' => $basePath,
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\console\controllers',
     'controllerMap' => [
-        'migrate' => [ // Fixture generation command line.
+        'migrate' => [
             'class' => yii\console\controllers\MigrateController::class,
             'migrationPath' => '@app/console/migrations'
         ],
@@ -72,13 +70,15 @@ return [
             'ruleTable' => 'rbac_auth_rule',
         ],
         'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
                     'class' => yii\log\FileTarget::class,
                     'levels' => ['error', 'warning'],
+                    'logFile' => '@runtime/logs/console.log'
                 ],
             ],
         ],
     ],
-    'params' => $params,
+    'params' => require $basePath . '/config/params.php',
 ];

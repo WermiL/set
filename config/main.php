@@ -1,23 +1,21 @@
 <?php
+$localServerName = 'yii2';
+$basePath = dirname(__DIR__);
 
-$params = array_merge(
-    require __DIR__ . '/params.php',
-    require __DIR__ . '/params-local.php'
-);
-
-return [
+$config = [
     'name' => 'Yii App',
     'language' => 'en-US',
     'aliases' => [
+        '@app' => $basePath,
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
     ],
-    'vendorPath' => dirname(__DIR__) . '/vendor',
-    'id' => 'yii-app',
-    'basePath' => dirname(__DIR__),
+    'vendorPath' => $basePath . '/vendor',
+    'id' => 'app-main-id',
+    'basePath' => $basePath,
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\frontend\controllers',
-    'viewPath'=>'@app/frontend/views',
+    'viewPath' => '@app/frontend/views',
     'components' => [
         'redis' => [
             'class' => yii\redis\Connection::class,
@@ -115,5 +113,22 @@ return [
             'class' => app\modules\dashboard\DashboardModule::class,
         ],
     ],
-    'params' => $params,
+    'params' => require $basePath . '/config/params.php',
 ];
+
+if (YII_DEBUG) {
+    $config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = [
+        'class' => yii\debug\Module::class,
+    ];
+}
+
+if ($_SERVER['SERVER_NAME'] === $localServerName) {
+
+    $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = [
+        'class' => yii\gii\Module::class,
+    ];
+}
+
+return $config;

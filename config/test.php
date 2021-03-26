@@ -1,6 +1,6 @@
 <?php
 return [
-    'id' => 'app-tests',
+    'id' => 'app-tests-id',
     'components' => [
         'db' => [
             'class' => yii\db\Connection::class,
