@@ -57,7 +57,7 @@ return [
                     'enableCaching' => false,
                     'cachingDuration' => 0,
                     'forceTranslation' => true,
-                    'sourceLanguage' => 'en_US',
+                    'sourceLanguage' => 'en-US',
                     'on missingTranslation' => [app\modules\i18n\handlers\TranslationEventHandler::class, 'handleMissingTranslation']
                 ],
             ],

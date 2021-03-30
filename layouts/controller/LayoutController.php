@@ -24,7 +24,12 @@ class LayoutController extends Controller
 
     public function init()
     {
-        Yii::$app->language = LanguageSelectForm::getLanguage();
+        $_languageSelectForm = new LanguageSelectForm();
+        $_languageSelectForm->identifier = $_languageSelectForm->getIdentifier();
+        if ($_languageSelectForm->validate()) {
+            Yii::$app->language = $_languageSelectForm->identifier;
+        }
+
         parent::init();
     }
 

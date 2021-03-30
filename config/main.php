@@ -5,7 +5,6 @@ $basePath = dirname(__DIR__);
 $config = [
     'name' => 'Yii App',
     'language' => 'en-US',
-    'sourceLanguage' => 'en-US',
     'aliases' => [
         '@app' => $basePath,
         '@bower' => '@vendor/bower-asset',
@@ -54,7 +53,7 @@ $config = [
                     'enableCaching' => false,
                     'cachingDuration' => 0,
                     'forceTranslation' => true,
-                    'sourceLanguage' => 'en_US',
+                    'sourceLanguage' => 'en-US',
                     'on missingTranslation' => [app\modules\i18n\handlers\TranslationEventHandler::class, 'handleMissingTranslation']
                 ],
             ],

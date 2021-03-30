@@ -32,49 +32,103 @@ class m210310_185647_create_i18n_table extends Migration
             '{{%i18n_source_message}}', 'id',
             'CASCADE', 'RESTRICT'
         );
+
         $this->createIndex('idx_i18n_source_message-category', '{{%i18n_source_message}}', 'category');
         $this->createIndex('idx_i18n_message-language', '{{%i18n_message}}', 'language');
 
+        $this->createTable('{{%i18n_language}}', [
+            'id' => $this->primaryKey(),
+            'identifier' => $this->string()->notNull()->defaultValue(''),
+            'name' => $this->text()->notNull()->defaultValue(''),
+            'status'=> $this->tinyInteger()->notNull()->defaultValue(1),
+        ]);
 
+        $this->batchInsert('{{%i18n_language}}',
+            ['identifier', 'name'],
+            [
+                ['en-US', 'English'],
+                ['uk-UA', 'Ukrainian'],
+                ['ru-RU', 'Russian'],
+            ]
+        );
+
+        /**
+         * Translation Permission
+         */
         $auth = Yii::$app->authManager;
         $roleAdmin = $auth->getRole(RbacAuthItem::ROLE_ADMIN);
 
-        $create = $auth->createPermission('i18n/create');
-        $create->description = 'Translation Create';
+        $createTranslation = $auth->createPermission('i18n_translation/create');
+        $createTranslation->description = 'Translation Create';
 
-        $view = $auth->createPermission('i18n/view');
-        $view->description = 'Translation View';
+        $viewTranslation = $auth->createPermission('i18n_translation/view');
+        $viewTranslation->description = 'Translation View';
 
-        $update = $auth->createPermission('i18n/update');
-        $update->description = 'Translation Update';
+        $updateTranslation = $auth->createPermission('i18n_translation/update');
+        $updateTranslation->description = 'Translation Update';
 
-        $delete = $auth->createPermission('i18n/delete');
-        $delete->description = 'Translation Delete';
+        $deleteTranslation = $auth->createPermission('i18n_translation/delete');
+        $deleteTranslation->description = 'Translation Delete';
 
-        $auth->add($create);
-        $auth->add($view);
-        $auth->add($update);
-        $auth->add($delete);
+        $auth->add($createTranslation);
+        $auth->add($viewTranslation);
+        $auth->add($updateTranslation);
+        $auth->add($deleteTranslation);
 
-        $auth->addChild($roleAdmin, $create);
-        $auth->addChild($roleAdmin, $view);
-        $auth->addChild($roleAdmin, $update);
-        $auth->addChild($roleAdmin, $delete);
+        $auth->addChild($roleAdmin, $createTranslation);
+        $auth->addChild($roleAdmin, $viewTranslation);
+        $auth->addChild($roleAdmin, $updateTranslation);
+        $auth->addChild($roleAdmin, $deleteTranslation);
+
+        /**
+         * Language Permission
+         */
+        $createLanguage = $auth->createPermission('i18n_language/create');
+        $createLanguage->description = 'Translation Create';
+
+        $viewLanguage = $auth->createPermission('i18n_language/view');
+        $viewLanguage->description = 'Translation View';
+
+        $updateLanguage = $auth->createPermission('i18n_language/update');
+        $updateLanguage->description = 'Translation Update';
+
+        $deleteLanguage = $auth->createPermission('i18n_language/delete');
+        $deleteLanguage->description = 'Translation Delete';
+
+        $auth->add($createLanguage);
+        $auth->add($viewLanguage);
+        $auth->add($updateLanguage);
+        $auth->add($deleteLanguage);
+
+        $auth->addChild($roleAdmin, $createLanguage);
+        $auth->addChild($roleAdmin, $viewLanguage);
+        $auth->addChild($roleAdmin, $updateLanguage);
+        $auth->addChild($roleAdmin, $deleteLanguage);
     }
 
     public function down()
     {
         $this->dropTable('{{%i18n_message}}');
         $this->dropTable('{{%i18n_source_message}}');
+        $this->dropTable('{{%i18n_language}}');
 
         $auth = Yii::$app->authManager;
-        $create = $auth->getPermission('i18n/create');
-        $view = $auth->getPermission('i18n/view');
-        $update = $auth->getPermission('i18n/update');
-        $delete = $auth->getPermission('i18n/delete');
-        $auth->remove($create);
-        $auth->remove($view);
-        $auth->remove($update);
-        $auth->remove($delete);
+        $createTranslation = $auth->getPermission('i18n_translation/create');
+        $viewTranslation = $auth->getPermission('i18n_translation/view');
+        $updateTranslation = $auth->getPermission('i18n_translation/update');
+        $deleteTranslation = $auth->getPermission('i18n_translation/delete');
+        $auth->remove($createTranslation);
+        $auth->remove($viewTranslation);
+        $auth->remove($updateTranslation);
+        $auth->remove($deleteTranslation);
+
+        $createLanguage = $auth->getPermission('i18n_language/create');
+        $viewLanguage = $auth->getPermission('i18n_language/view');
+        $updateLanguage = $auth->getPermission('i18n_language/update');
+        $deleteLanguage = $auth->getPermission('i18n_language/delete');
+        $auth->remove($createLanguage);
+        $auth->remove($viewLanguage);
+        $auth->remove($updateLanguage);
+        $auth->remove($deleteLanguage);
     }
 }

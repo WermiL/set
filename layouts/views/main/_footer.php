@@ -11,12 +11,12 @@ use yii\helpers\Url;
             <div class="ml-auto">
                 <?= Html::a('RU', Url::to('/i18n/language'), ['class' => 'px-2 mx-1', 'data-method' => 'POST',
                     'data-params' => [
-                        'language' => 'ru_RU',
+                        'identifier' => 'ru-RU',
                         'url' => Url::current()
                     ]]) ?>
                 <?= Html::a('EN', Url::to('/i18n/language'), ['class' => 'px-2 mx-1', 'data-method' => 'POST',
                     'data-params' => [
-                        'language' => 'en_US',
+                        'identifier' => 'en-US',
                         'url' => Url::current()
                     ],]) ?>
             </div>

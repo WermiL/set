@@ -6,6 +6,7 @@ use app\layouts\controller\LayoutController;
 use app\modules\i18n\models\forms\LanguageSelectForm;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 /**
  * Site controller
@@ -23,19 +24,21 @@ class LanguageController extends LayoutController
             ],
         ];
     }
+
     /**
      * Set Language
      */
     public function actionIndex()
     {
         $_languageSelectForm = new LanguageSelectForm();
-        $_languageSelectForm->language = Yii::$app->request->post('language');
-        $_languageSelectForm->url = Yii::$app->request->post('url');
+        $_languageSelectForm->identifier = (string)Yii::$app->request->post('identifier');
+        $_languageSelectForm->url = (string)Yii::$app->request->post('url');
         if ($_languageSelectForm->validate()) {
             {
-                $_languageSelectForm->setLanguage();
-                $this->redirect($_languageSelectForm->url);
+                $_languageSelectForm->setIdentifier();
+                return $this->redirect($_languageSelectForm->url);
             }
         }
+        return $this->redirect(Url::to('/'));
     }
 }
