@@ -12,7 +12,7 @@ use yii\web\Cookie;
  * @property string $language
  * @property string $url
  */
-class LanguageSelectionForm extends Model
+class LanguageSelectForm extends Model
 {
     public $language;
     public $url;

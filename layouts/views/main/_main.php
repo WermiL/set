@@ -4,7 +4,9 @@
 use app\widgets\Alert;
 
 ?>
-<div class="container">
-    <?= Alert::widget() ?>
-    <?= $content ?>
-</div>
+<main class="main">
+    <div class="container">
+        <?= Alert::widget() ?>
+        <?= $content ?>
+    </div>
+</main>

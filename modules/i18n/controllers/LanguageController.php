@@ -3,7 +3,7 @@
 namespace app\modules\i18n\controllers;
 
 use app\layouts\controller\LayoutController;
-use app\modules\i18n\models\forms\LanguageSelectionForm;
+use app\modules\i18n\models\forms\LanguageSelectForm;
 use Yii;
 use yii\filters\VerbFilter;
 
@@ -28,13 +28,13 @@ class LanguageController extends LayoutController
      */
     public function actionIndex()
     {
-        $_languageSelectionForm = new LanguageSelectionForm();
-        $_languageSelectionForm->language = Yii::$app->request->post('language');
-        $_languageSelectionForm->url = Yii::$app->request->post('url');
-        if ($_languageSelectionForm->validate()) {
+        $_languageSelectForm = new LanguageSelectForm();
+        $_languageSelectForm->language = Yii::$app->request->post('language');
+        $_languageSelectForm->url = Yii::$app->request->post('url');
+        if ($_languageSelectForm->validate()) {
             {
-                $_languageSelectionForm->setLanguage();
-                $this->redirect($_languageSelectionForm->url);
+                $_languageSelectForm->setLanguage();
+                $this->redirect($_languageSelectForm->url);
             }
         }
     }

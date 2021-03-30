@@ -1,48 +1,21 @@
 <?php
 
-use app\modules\i18n\models\forms\LanguageSelectionForm;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
-NavBar::begin([
-    'brandLabel' => Yii::$app->name,
-    'brandUrl' => Yii::$app->homeUrl,
-    'options' => [
-        'class' => 'navbar navbar-expand-md navbar-dark bg-dark',
-    ],
-]);
 $menuItems = [];
-
-$menuItems[] =
-    '<li class="dropdown nav-item">' .
-    '<a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">'.  LanguageSelectionForm::getLanguage() .'</a>' .
-    '<div id="w2" class="dropdown-menu">' .
-    Html::a('RU', \yii\helpers\Url::to('/i18n/language'), ['class' => ' dropdown-item', 'data-method' => 'POST',
-        'data-params' => [
-            'language' => 'ru_RU',
-            'url' => \yii\helpers\Url::current()
-        ],]) .
-    Html::a('EN', \yii\helpers\Url::to('/i18n/language'), ['class' => 'dropdown-item', 'data-method' => 'POST',
-        'data-params' => [
-            'language' => 'en_US',
-            'url' => \yii\helpers\Url::current()
-        ],]) .
-    '</div>' .
-    '</li>';
-
-
 if (Yii::$app->user->isGuest) {
     $menuItems[] = ['label' => Yii::t('user', 'Sign in'), 'url' => ['/user/sign-in'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light ml-auto']];
     $menuItems[] = ['label' => Yii::t('user', 'Sign up'), 'url' => ['/user/sign-up'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light']];
     $navOptions = ['class' => 'navbar-nav ml-auto'];
 } else {
     $menuItems[] = ['label' => Yii::t('site', 'Admin Panel'), 'url' => ['/dashboard/main'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light mr-auto']];
-
     $menuItems[] = '<li class="ml-auto nav-item">'
         . Html::beginForm(['/user/sign-in/sign-out'], 'post')
         . Html::submitButton(
-            Yii::t('user', 'Sign out') . ' (' . Yii::$app->user->identity->email . ')',
+            Yii::t('user', 'Sign out') . ' (' . Html::encode(Yii::$app->user->identity->email) . ')',
             [
                 'class' => 'btn btn-outline-secondary text-light nav-link',
                 'data' => [
@@ -55,8 +28,24 @@ if (Yii::$app->user->isGuest) {
         . '</li>';
     $navOptions = ['class' => 'navbar-nav col-12'];
 }
-echo Nav::widget([
-    'options' => $navOptions,
-    'items' => $menuItems,
-]);
-NavBar::end();
+?>
+
+<header class="header">
+    <?php
+    NavBar::begin([
+        'brandLabel' => Html::encode(Yii::$app->name),
+        'brandUrl' => Url::to('/', true),
+        'brandOptions' => [
+            'class' => 'btn btn-outline-secondary rounded border border-white p-1',
+        ],
+        'options' => [
+            'class' => 'navbar navbar-expand-md navbar-dark bg-dark p-1',
+        ],
+    ]);
+    echo Nav::widget([
+        'options' => $navOptions,
+        'items' => $menuItems,
+    ]);
+    NavBar::end();
+    ?>
+</header>

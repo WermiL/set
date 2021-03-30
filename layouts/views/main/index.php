@@ -22,17 +22,15 @@ MainAsset::register($this);
 </head>
 <body class="d-flex flex-column">
 <?php $this->beginBody() ?>
-<header class="header">
-    <?= $this->render('_header') ?>
-</header>
-<main class="main">
-    <?= $this->render('_main', [
-        'content' => $content
-    ]) ?>
-</main>
-<footer class="footer p-0 mt-auto">
-    <?= $this->render('_footer') ?>
-</footer>
+
+<?= $this->render('_header') ?>
+
+<?= $this->render('_main', [
+    'content' => $content
+]) ?>
+
+<?= $this->render('_footer') ?>
+
 <div id="particles-js"></div>
 <?php $this->endBody() ?>
 </body>

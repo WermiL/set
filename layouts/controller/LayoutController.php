@@ -2,7 +2,7 @@
 
 namespace app\layouts\controller;
 
-use app\modules\i18n\models\forms\LanguageSelectionForm;
+use app\modules\i18n\models\forms\LanguageSelectForm;
 use Yii;
 use yii\web\Controller;
 
@@ -24,7 +24,7 @@ class LayoutController extends Controller
 
     public function init()
     {
-        Yii::$app->language = LanguageSelectionForm::getLanguage();
+        Yii::$app->language = LanguageSelectForm::getLanguage();
         parent::init();
     }
 
